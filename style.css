@@ -11,3 +11,33 @@ canvas {
 	height: 100%;
 	padding: 0;
 }
+
+#test {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	font-family: sans-serif;
+	width: 60%;
+}
+
+.header {
+	display: flex;
+	font-family: sans-serif;
+}
+#logo{
+	display: flex;
+	width: 50%;
+}
+#menu {
+	display: flex;
+	width: 50%;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+h2 {
+	color: grey;
+	font-weight: 200;
+	font-size: 20px;
+}
