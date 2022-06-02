@@ -2,7 +2,7 @@
 html, body {
 	overflow: hidden;
 	user-select: none;
-  padding: 0;
+  padding: 20px;
   margin: 0;
 }
 
@@ -24,7 +24,9 @@ canvas {
 .header {
 	display: flex;
 	font-family: sans-serif;
+	font-size: 2vw;
 }
+
 #logo{
 	display: flex;
 	width: 50%;
@@ -39,5 +41,9 @@ canvas {
 h2 {
 	color: grey;
 	font-weight: 200;
-	font-size: 20px;
+	font-size: 4vw;
+}
+
+#main-header {
+	font-size: 3.5vw;
 }

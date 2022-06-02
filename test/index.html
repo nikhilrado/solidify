@@ -25,7 +25,7 @@ function STLViewer(model, elementID) {
   //controls
   controls = new THREE.OrbitControls(camera, renderer.domElement);
   controls.enableDamping = true;
-  controls.rotateSpeed = 0.05;
+  controls.rotateSpeed = 0.5;
   controls.dampingFactor = 1.2;
   controls.enableZoom = true;
   controls.autoRotate = true;
@@ -34,8 +34,11 @@ function STLViewer(model, elementID) {
   scene = new THREE.Scene();
   scene.add(new THREE.HemisphereLight(0xffffff, 1.5));
 	const light = new THREE.PointLight( 0xffffff, 1, 100 );
-	light.position.set( 50, -50, 50 );
+	light.position.set( 50, 50, 50 );
 	scene.add(light);
+	const light2 = new THREE.PointLight( 0xffffff, 1, 100 );
+	light2.position.set( -50, 50, 50 );
+	scene.add(light2);
 
   loadit(model);
 }
