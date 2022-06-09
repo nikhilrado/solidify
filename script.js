@@ -65,3 +65,9 @@ loader.load(
     }
 )
 render();
+
+function submit(){
+	alert(`The function 'test' is executed`);
+	var input = document.getElementById('fname');
+	console.log(input.value);		
+}
