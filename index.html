@@ -25,82 +25,8 @@
 		<h2>Gain a solid understanding of your data by visualizing it in three dimensions.</h2>
 	</div>
 
-	
-  <script>
-    function test() {
-      //alert(`The function 'test' is executed`);
-			var input = document.getElementById('username');
-			//console.log(input.value);
-			window.location.href = "https://3ddata.nikhilrado.repl.co/test?data=" + input.value;
-    }
-  </script>
-
-	<script type="text/javascript">
-		function arrayToString(array){
-			output = "["
-			for (var i = 0; i < array.length; i++){
-				output += "["
-				//for (var j = 0; j < array[i].length; j++){
-					
-					output += array[i]//
-				  output += ","
-					
-					
-				//}
-				output = output.slice(0, -1)
-				output += "],"
-			}
-			output = output.slice(0, -1)
-			output += "]"
-			output = output
-			console.log("yo")
-			output = output.replace(/(\r\n|\n|\r)/gm, "")
-			console.log(output)
-			sessionStorage.setItem('data', output)
-			document.cookie = "data=" + output
-			window.location.href = "/test";
-		}
-		//arrayToString([[1,2,3,4],[2,3,4]])
-		
-    function Upload() {
-        var fileUpload = document.getElementById("fileUpload");
-        var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
-			  var data = []
-        if (regex.test(fileUpload.value.toLowerCase())) {
-            if (typeof (FileReader) != "undefined") {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    var table = document.createElement("table");
-                    var rows = e.target.result.split("\n");
-                    for (var i = 0; i < rows.length; i++) {
-                        var row = table.insertRow(-1);
-                        var cells = rows[i].split(",");
-                        for (var j = 0; j < cells.length; j++) {
-                            var cell = row.insertCell(-1);
-                            cell.innerHTML = cells[j];
-														//console.log(cells)
-                        }
-												data.push(cells)
-											
-												//console.log(data)
-                    }
-										//console.log(data)
-										arrayToString(data)
-                    var dvCSV = document.getElementById("dvCSV");
-                    dvCSV.innerHTML = "";
-                    dvCSV.appendChild(table);
-                }
-                reader.readAsText(fileUpload.files[0]);
-            } else {
-                alert("This browser does not support HTML5.");
-            }
-        } else {
-            alert("Please upload a valid CSV file.");
-        }
-    }
 
 
-</script>
 <p>Select a file or enter a datastream:</p><br>
 <div class=bbox>
 <input type="file" id="fileUpload"/>
@@ -111,55 +37,6 @@
 	<button onclick="go()">Go</button>
 </div>
 
-
-
-
-<script>
-function go(){
-	sessionStorage.setItem('data', document.getElementById('data2').value)
-	window.location.href = "https://solidify.ortanatech.com/test?data=bob"//+document.getElementById('data2').value
-}
-	
-		function getCookie(cname) {
-	  let name = cname + "=";
-	  let decodedCookie = decodeURIComponent(document.cookie);
-	  let ca = decodedCookie.split(';');
-	  for(let i = 0; i <ca.length; i++) {
-	    let c = ca[i];
-	    while (c.charAt(0) == ' ') {
-	      c = c.substring(1);
-	    }
-	    if (c.indexOf(name) == 0) {
-	      return c.substring(name.length, c.length);
-	    }
-	  }
-	  return "";
-	}
-	
-	function generateUUID(){
-		return Math.random().toFixed(4)*10000
-	}
-	if (getCookie("uuid") == ""){
-			document.cookie = "uuid=" + generateUUID()
-			console.log("uuid created")
-	}
-	console.log(getCookie("uuid"))
-	
-	
-		var input2 = document.getElementById('upload');
-		input2.addEventListener('change', Upload);
-		input2.onchange = () => {
-	  const selectedFile = input2.files[0];
-	  console.log(selectedFile);
-		}
-
-	const fileInput = document.getElementById('upload');
-	const handleFiles = () => {
-	  const selectedFiles = [...fileInput.files];
-	  console.log(selectedFiles);
-	}
-	fileInput.addEventListener("change", handleFiles);
-</script>
 
 </body>
 
