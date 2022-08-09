@@ -34,8 +34,11 @@
 
 		<button type="button" id="payy" onclick="pay()">Purchase</button>
 	</form>
+	<p><a id="download-stl-link">Download STL</a></p>
 </div>
+
 </div>
+
 </body>
 
 <style>
@@ -218,6 +221,8 @@ function loadit(model){
     .then(function (json) {
 		console.log(json);
 		//loadit(json);
+		stlLink = json;
+		document.getElementById("download-stl-link").href = stlLink;
     STLViewer(json, "model"); // calling and passing json to another function processPriceInfo
     });
 	}
