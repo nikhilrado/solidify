@@ -2,41 +2,56 @@
 <html>
 
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width">
-	<title>Solidify</title>
-	<link href="style.css" rel="stylesheet" type="text/css" />
-	<script src="script.js"></script>
+
+	<script src="/ex-scripts/three.min.js"></script>
+	<script src="/ex-scripts/STLLoader.js"></script>
+	<script src="/ex-scripts/OrbitControls.js"></script>
+	
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Solidify</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <script src="script.js"></script>
 </head>
 
 <body>
+
 	<div class="header">
-		<div id="logo">
-			<p>Solidify</p>
-		</div>
-		<div id="menu">
-			<p><a href="/test">Upload Data</a></p>
-			<p>Checkout</p>
-			<p>About</p>
-		</div>
+			<div id="logo">
+					<p>Solidify</p>
+			</div>
+			<div id="menu">
+					<p>About</p>
+					<p>Tutorial</p>
+			</div>
 	</div>
 
-	<div id="test">
-		<h1 id='main-header'>Solidify</h1>
-		<h2>Gain a solid understanding of your data by visualizing it in three dimensions.</h2>
+	<div class="row">
+	  <div class="column left">
+			<div id="test">
+        <h1 id='main-header'>Solidify</h1>
+        <h2>Gain a solid understanding of your data by visualizing it in three dimensions.</h2>
+    </div>
+
+
+
+    <p>Select a CSV file or enter a datastream:</p><br>
+    <div class=bbox>
+        <input type="file" id="fileUpload" />
+        <input type="button" id="upload" value="Go" onclick="Upload()" />
+    </div><br>
+    <div class=bbox>
+        <p class=txt>Enter Data Stream:</p>
+        <input id="data2"></input>
+        <button onclick="go()">Go</button>
+    </div>
+		</div>
+	  <div class="column right">
+			<div id="model" style="width: 100%; height: 700px; padding: 0px;"> </div>
+		</div>
 	</div>
-
-
-
-<p>Select a file or enter a datastream:</p><br>
-<div class=bbox>
-<input type="file" id="fileUpload"/>
-<input type="button" id="upload" value="Go" onclick="Upload()" /></div><br>
-<div class=bbox>
-	<p class=txt>Enter Data Stream:</p>
-	<input id="data2"></input>
-	<button onclick="go()">Go</button>
-</div>
+	
+    
 
 
 </body>
