@@ -203,7 +203,7 @@ function loadit(model){
 }
 
 
-		var URL = 'https://4befauqm4ynfn7ryg7huizv6ca0lcoxq.lambda-url.us-east-2.on.aws?csv='
+		var URL = 'https://api.solidify.ortanatech.com/3d/csv?csv='
 
 	
 	
