@@ -13,7 +13,7 @@ function test() {
     input += "-all";
   }
   console.log(input);
-  window.location.href = "/test?data=" + input;
+  window.location.href = "/create?data=" + input;
 }
 
 function arrayToString(array) {
@@ -37,7 +37,7 @@ function arrayToString(array) {
   console.log(output);
   sessionStorage.setItem("data", output);
   document.cookie = "data=" + output;
-  window.location.href = "/test";
+  window.location.href = "/create";
 }
 //arrayToString([[1,2,3,4],[2,3,4]])
 
@@ -80,7 +80,7 @@ function Upload() {
 
 function go() {
   sessionStorage.setItem("data", document.getElementById("data2").value);
-  window.location.href = "/test?data=bob"; //+document.getElementById('data2').value
+  window.location.href = "/create?data=bob"; //+document.getElementById('data2').value
 }
 
 function getCookie(cname) {
