@@ -86,7 +86,7 @@ window.addEventListener('load',function(){
 	  event.target.style.background = "#51b851";
 		console.log("fetch initiated")
 
-		var URL = "https://6jmccwuhpljudbczwm7uaheuzy0infif.lambda-url.us-east-2.on.aws/?action=upload-model&uuid="
+		var URL = "https://api.solidify.ortanatech.com/action?action=upload-model&uuid="
 		fetch(URL+getCookie("uuid"))
   .then(response => response.json())
   .then(function(json){
@@ -101,7 +101,7 @@ document.getElementById("payy").style.backgroundColor = 'lightgreen'
 });
 
 function getCheckoutLink(shipping_countryf,obj_name){
-	var URL = "https://6jmccwuhpljudbczwm7uaheuzy0infif.lambda-url.us-east-2.on.aws/"
+	var URL = "https://api.solidify.ortanatech.com/action/"
 	fetch(URL,{
 		headers: {
       'Accept': 'application/json',
@@ -210,9 +210,7 @@ function loadit(model){
 
 <script type="text/javascript">
 
-	
-		var URL = 'https://4befauqm4ynfn7ryg7huizv6ca0lcoxq.lambda-url.us-east-2.on.aws?csv='
-
+		var URL = 'https://api.solidify.ortanatech.com/3d/csv?csv='
 	
 	
 	function load_stl(csv){

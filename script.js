@@ -13,7 +13,7 @@ function test() {
     input += "-all";
   }
   console.log(input);
-  window.location.href = "https://3ddata.nikhilrado.repl.co/test?data=" + input;
+  window.location.href = "/test?data=" + input;
 }
 
 function arrayToString(array) {
@@ -80,7 +80,7 @@ function Upload() {
 
 function go() {
   sessionStorage.setItem("data", document.getElementById("data2").value);
-  window.location.href = "https://solidify.ortanatech.com/test?data=bob"; //+document.getElementById('data2').value
+  window.location.href = "/test?data=bob"; //+document.getElementById('data2').value
 }
 
 function getCookie(cname) {
