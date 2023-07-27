@@ -236,7 +236,9 @@ function loadit(model){
     csvHash = cyrb53(csv)
     if (csvHash == sessionStorage.getItem("csvHash")){
       console.log("same csv")
-      STLViewer(sessionStorage.getItem("stlLink"), "model")
+      stlLink = sessionStorage.getItem("stlLink")
+		  document.getElementById("download-stl-link").href = stlLink;
+      STLViewer(stlLink, "model")
       return
     } else {
       sessionStorage.setItem("csvHash",csvHash)
