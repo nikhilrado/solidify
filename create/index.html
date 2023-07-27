@@ -62,22 +62,23 @@ button:hover {
 </style>
 <script>
 
-	
-	function getCookie(cname) {
-	  let name = cname + "=";
-	  let decodedCookie = decodeURIComponent(document.cookie);
-	  let ca = decodedCookie.split(';');
-	  for(let i = 0; i <ca.length; i++) {
-	    let c = ca[i];
-	    while (c.charAt(0) == ' ') {
-	      c = c.substring(1);
-	    }
-	    if (c.indexOf(name) == 0) {
-	      return c.substring(name.length, c.length);
-	    }
-	  }
-	  return "";
-	}
+// returns the strong of the cookie with the name cname
+function getCookie(cookieName) {
+  let name = cookieName + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(';');
+  for(let i = 0; i <ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
 var jsondata;
 window.addEventListener('load',function(){
 	const password = document.getElementById('o-name');
@@ -100,6 +101,7 @@ document.getElementById("payy").style.backgroundColor = 'lightgreen'
 	});
 });
 
+// returns a Stripe checkout link
 function getCheckoutLink(shipping_countryf,obj_name){
 	var URL = "https://api.solidify.ortanatech.com/action/"
 	fetch(URL,{
@@ -210,10 +212,37 @@ function loadit(model){
 
 <script type="text/javascript">
 
-		var URL = 'https://api.solidify.ortanatech.com/3d/csv?csv='
-	
+	var URL = 'https://api.solidify.ortanatech.com/3d/csv?csv='
+
+  // a hash function from https://stackoverflow.com/a/52171480
+  const cyrb53 = (str, seed = 0) => {
+    let h1 = 0xdeadbeef ^ seed, h2 = 0x41c6ce57 ^ seed;
+    for(let i = 0, ch; i < str.length; i++) {
+        ch = str.charCodeAt(i);
+        h1 = Math.imul(h1 ^ ch, 2654435761);
+        h2 = Math.imul(h2 ^ ch, 1597334677);
+    }
+    h1  = Math.imul(h1 ^ (h1 >>> 16), 2246822507);
+    h1 ^= Math.imul(h2 ^ (h2 >>> 13), 3266489909);
+    h2  = Math.imul(h2 ^ (h2 >>> 16), 2246822507);
+    h2 ^= Math.imul(h1 ^ (h1 >>> 13), 3266489909);
+  
+    return 4294967296 * (2097151 & h2) + (h1 >>> 0);
+};
 	
 	function load_stl(csv){
+    csv = csv.replace(/\s/g,'') // remove whitespace
+
+    csvHash = cyrb53(csv)
+    if (csvHash == sessionStorage.getItem("csvHash")){
+      console.log("same csv")
+      STLViewer(sessionStorage.getItem("stlLink"), "model")
+      return
+    } else {
+      sessionStorage.setItem("csvHash",csvHash)
+      
+    }
+
     fetch(URL+csv+"&uuid="+getCookie("uuid"))
     .then(function (u) {return u.json();})
     .then(function (json) {
@@ -221,6 +250,7 @@ function loadit(model){
 		//loadit(json);
 		stlLink = json;
 		document.getElementById("download-stl-link").href = stlLink;
+    sessionStorage.setItem("stlLink",stlLink)
     STLViewer(json, "model"); // calling and passing json to another function processPriceInfo
     });
 	}
@@ -229,6 +259,8 @@ function loadit(model){
 	const params = new URLSearchParams(location.search);
 	var param_data = params.get('data')
 	console.log("fdfd:"+param_data)
+
+  // will load stl with query param "data" value or session storage data
 	if(param_data != null){
 		load_stl(param_data)
 	} else {		
