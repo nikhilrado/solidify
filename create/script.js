@@ -1,3 +1,4 @@
+console.log("running create/script.js")
 // returns the string of the cookie with the name cookieName
 // from w3schools https://www.w3schools.com/js/js_cookies.asp
 function getCookie(cookieName) {
@@ -53,6 +54,7 @@ function pay() {
 // sets the 3d model viewbox then calls loadModel()
 // (inserts the stl file "model" into the html element with id "elementID")
 function prepareSTLViewer(model, elementID) {
+  console.log("prepareSTLViewer")
   var elem = document.getElementById(elementID);
   camera = new THREE.PerspectiveCamera(
     70,
@@ -97,6 +99,7 @@ function prepareSTLViewer(model, elementID) {
 
 // loads the stl file "model" into the scene
 function loadModel(model) {
+  console.log("loadModel")
   new THREE.STLLoader().load(model, function (geometry) {
     var material = new THREE.MeshPhongMaterial({
       color: 0xff5533,
@@ -106,7 +109,7 @@ function loadModel(model) {
     mesh = new THREE.Mesh(geometry, material);
     scene.add(mesh);
 
-    //console.log(mesh);
+    console.log(mesh);
     //scene.remove(mesh);
 
     var middle = new THREE.Vector3();
@@ -151,6 +154,7 @@ const cyrb53 = (str, seed = 0) => {
 };
 
 function loadStl(csv) {
+  console.log("loadSTL")
   const generateModelAPIURL = "https://api.solidify.ortanatech.com/3d/csv?csv=";
 
   // check if current data is same as last saved data,

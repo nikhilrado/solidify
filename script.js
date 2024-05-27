@@ -238,6 +238,7 @@ function loadit(model){
 
 window.onload = function() {
     //STLViewer("https://3ddata.nikhilrado.repl.co/ex-scripts/will-ronan.stl", "model")
+console.log("loading cshs model")
 STLViewer("/ex-scripts/cshs.stl", "model")
 
 	
