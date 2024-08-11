@@ -1,0 +1,26 @@
+#cont {
+  display: flex;
+  height: 100%;
+}
+#model {
+  background-color: #bbbbbb;
+}
+button {
+  border: 0px solid #cccccc;
+  padding: 0.6em 0.6em;
+  border-radius: 0.6em;
+  background-color: #c5c4c4;
+  transition: 1s;
+}
+button:hover {
+  background-color: #888888;
+}
+
+#model {
+  background-color: #c2c2c2;
+  border-radius: 10px;
+}
+#model-infobox {
+  /* background-color: blue; */
+  margin-left: 10px;
+}
