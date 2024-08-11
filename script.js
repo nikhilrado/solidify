@@ -80,7 +80,7 @@ function Upload() {
 
 function go() {
   sessionStorage.setItem("data", document.getElementById("data2").value);
-  window.location.href = "/create?data=bob"; //+document.getElementById('data2').value
+  window.location.href = "/create?data="+document.getElementById('data2').value
 }
 
 function getCookie(cname) {
