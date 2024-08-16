@@ -3,7 +3,7 @@
 	height: 100%;
 }
 #model {
-	background-color: #BBBBBB;
+	background-color: #4a4a4a;
 	border-radius: 15px;
 }
 button {
@@ -15,4 +15,8 @@ button {
 }
 button:hover {
 	background-color: #888888;
+}
+#html {
+	background-color: black;
+	color: black;
 }
