@@ -1,31 +1,3 @@
-// code for new dropdown modal
-function changeButtonText(element, textWithIcon) {
-  // Update the dropdown button text and icon
-  document.getElementById("left-dropdown").innerHTML = textWithIcon + ' <i class="fas fa-chevron-down dropdown-icon"></i>';
-  document.getElementById('filenameInput').placeholder = 'nikhilrado';
-  document.getElementById('filenameInput').value = '';
-  document.getElementById('filenameInput').focus();
-  document.getElementById('filenameInput').removeAttribute('readonly');
-  // Hide the dropdown after selection
-  document.getElementById('feed-picker-dropdown-content').style.display = 'none';
-}
-
-function openFileSelector() {
-  document.getElementById('fileInput').click();
-}
-
-function setFileName() {
-  const fileInput = document.getElementById('fileInput');
-  const filename = fileInput.files[0].name;
-  document.getElementById('filenameInput').placeholder = filename;
-  document.getElementById('filenameInput').setAttribute('readonly', 'readonly');
-  document.getElementById("left-dropdown").innerHTML = '<i class="fas fa-paperclip"></i> File Upload <i class="fas fa-chevron-down dropdown-icon"></i>';
-}
-
-// Initialize these variables after DOM loads
-let button;
-let dropdown;
-
 // functionality scripts
 function submit() {
   alert(`The function 'test' is executed`);
@@ -70,7 +42,7 @@ function arrayToString(array) {
 //arrayToString([[1,2,3,4],[2,3,4]])
 
 function Upload() {
-  var fileUpload = document.getElementById("fileUpload");
+  var fileUpload = document.getElementById("fileInput");
   var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
   var data = [];
   if (regex.test(fileUpload.value.toLowerCase())) {
@@ -107,8 +79,16 @@ function Upload() {
 }
 
 function go() {
-  sessionStorage.setItem("data", document.getElementById("data2").value);
-  window.location.href = "/create?data=" + document.getElementById('data2').value
+  let dataDropdownType = document.getElementById("left-dropdown");
+  let dataPrefix;
+  if (dataDropdownType.innerText == "Github") {
+    dataPrefix = "github-";
+  } else if (dataDropdownType.innerText == "File Upload") {
+    Upload()
+    return;
+  }
+  sessionStorage.setItem("data", document.getElementById("filenameInput").value);
+  window.location.href = `/create?data=${dataPrefix}` + document.getElementById('filenameInput').value
 }
 
 function getCookie(cname) {
@@ -265,11 +245,40 @@ if (param_data != null) {
 
 
 window.onload = function() {
-  //STLViewer("https://3ddata.nikhilrado.repl.co/ex-scripts/will-ronan.stl", "model")
-  STLViewer("/ex-scripts/cshs.stl", "model")
+  // STLViewer("https://3ddata.nikhilrado.repl.co/ex-scripts/will-ronan.stl", "model")
 
-  button = document.querySelector('.dropbtn');
-  dropdown = document.getElementById('feed-picker-dropdown-content');
+  // Add event listener for 'keypress' on filenameInput
+  document.getElementById('filenameInput').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+      go();
+    }
+  });
+
+  function changeButtonText(element, textWithIcon) {
+    // Update the dropdown button text and icon
+    document.getElementById("left-dropdown").innerHTML = textWithIcon + ' <i class="fas fa-chevron-down dropdown-icon"></i>';
+    document.getElementById('filenameInput').placeholder = 'nikhilrado';
+    document.getElementById('filenameInput').value = '';
+    document.getElementById('filenameInput').focus();
+    document.getElementById('filenameInput').removeAttribute('readonly');
+    // Hide the dropdown after selection
+    document.getElementById('feed-picker-dropdown-content').style.display = 'none';
+  }
+
+  function openFileSelector() {
+    document.getElementById('fileInput').click();
+  }
+
+  function setFileName() {
+    const fileInput = document.getElementById('fileInput');
+    const filename = fileInput.files[0].name;
+    document.getElementById('filenameInput').placeholder = filename;
+    document.getElementById('filenameInput').setAttribute('readonly', 'readonly');
+    document.getElementById("left-dropdown").innerHTML = '<i class="fas fa-paperclip"></i> File Upload <i class="fas fa-chevron-down dropdown-icon"></i>';
+  }
+
+  const button = document.querySelector('.dropbtn');
+  const dropdown = document.getElementById('feed-picker-dropdown-content');
 
   button.addEventListener('mouseover', function() {
     dropdown.style.display = 'block';
@@ -286,6 +295,8 @@ window.onload = function() {
   dropdown.addEventListener('mouseout', function() {
     dropdown.style.display = 'none';
   });
+
+  // STLViewer("/ex-scripts/cshs.stl", "model")
 
 
 

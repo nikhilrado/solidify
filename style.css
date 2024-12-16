@@ -68,26 +68,131 @@ h2 {
 	margin-bottom: -30px;
 }
 
-input[type=file]::file-selector-button,button, #upload {
-  border: 0px solid #cccccc;
-  padding: .4em .4em;
-  border-radius: .4em;
-  background-color: #c5c4c4;
-  transition: 1s;
-}
-button:hover {
-	background-color: #888888;
-}
-.bbox {
-	background-color: #d9d9d9;
-	padding: .2em;
-	border-radius: 5px;
-	font-family: sans-serif;
-  width: fit-content;
-}
 p, .txt {
 	font-family: sans-serif;
 	font-size: 16px;
 	display: inline-block;
 	margin: 0px;
+}
+
+/* new modal style */
+.container {
+	display: flex;
+	align-items: center;
+}
+
+.dropbtn {
+	color: white;
+	margin: 0;
+	padding-left: 16px;
+	font-size: 16px;
+	font-family: sans-serif;
+	border: none;
+	cursor: pointer;
+	height: 38px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-right: 10px;
+	position: relative;
+	transition: filter 0.2s ease;
+	/* Add smooth transition to filter property */
+}
+
+/* Hover and focus-within effect for the left dropdown */
+.dropdown:hover .dropbtn,
+.dropdown:focus-within .dropbtn,
+.dropbtn:hover {
+	filter: hue-rotate(40deg);
+}
+
+#left-dropdown {
+	border-top-left-radius: 15px;
+	border-bottom-left-radius: 15px;
+	background: #8207df;
+	background: linear-gradient(45deg, #8207df 5%, #090979 35%, #055db1 97%);
+}
+
+#right-dropdown {
+	border-top-right-radius: 15px;
+	border-bottom-right-radius: 15px;
+	background: #090979;
+	background: linear-gradient(-45deg, #090979 20%, #055db1 97%);
+	padding-right: 20px;
+}
+
+.dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #f9f9f9;
+	min-width: 180px;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	z-index: 1;
+	border-radius: 15px;
+	font-family: sans-serif;
+	padding: 4px;
+}
+
+.dropdown-content p {
+	color: black;
+	padding: 8px 12px;
+	margin: 0;
+	text-decoration: none;
+	display: flex;
+	align-items: center;
+	justify-content: start;
+	cursor: pointer;
+	border-radius: 11px;
+}
+
+/* Ensure icons are centered and have equal width */
+.dropdown-content p i {
+	flex-shrink: 0;
+	width: 16px;
+	text-align: center;
+}
+
+.dropdown-content p span {
+	margin-left: 8px;
+	flex-grow: 1;
+}
+
+.dropdown-content p:hover {
+	background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+	display: block;
+}
+
+.dropdown:hover .dropbtn {
+	background-color: #3e8e41;
+}
+
+input {
+	border: none;
+	background-color: rgb(197, 197, 197);
+	height: 38px;
+	box-sizing: border-box;
+	padding: 0 16px;
+	margin: 0;
+	flex-grow: 0;
+	font-family: sans-serif;
+}
+
+input:focus {
+	outline: none;
+}
+
+#fileInput {
+	display: none;
+}
+
+.dropbtn i {
+	margin-right: 8px;
+}
+
+.dropbtn .dropdown-icon {
+	margin-left: 8px;
+	font-size: 12px;
 }
