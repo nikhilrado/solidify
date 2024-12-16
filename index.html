@@ -2,67 +2,8 @@
 <html>
 
 <head>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-	<script src="/ex-scripts/three.min.js"></script>
-	<script src="/ex-scripts/STLLoader.js"></script>
-	<script src="/ex-scripts/OrbitControls.js"></script>
-	
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>Solidify</title>
-    <link href="style.css" rel="stylesheet" type="text/css" />
-    <script src="script.js"></script>
-</head>
-
-<body>
-
-	<div class="header">
-			<div id="logo">
-					<p>Home</p>
-			</div>
-			<div id="menu">
-					<p><a href="/about">About</a></p>
-					<p><a href='https://doc.clickup.com/10552948/p/h/a21km-408/5a9010c6cb9cd39' target="_blank">Roadmap</a></p>
-					<p><a href='/tutorial' target="_blank">Tutorial</a></p>
-			</div>
-	</div>
-
-	<div class="row">
-	  <div class="column left">
-			<div id="test">
-        <h1 id='main-header'>Solidify</h1>
-        <h2>Gain a solid understanding of your data by visualizing it in three dimensions.</h2>
-    </div>
-
-
-
-    <p>Select a CSV file or enter a datastream:</p><br>
-    <div class=bbox>
-        <input type="file" id="fileUpload" />
-        <input type="button" id="upload" value="Go" onclick="Upload()" />
-    </div><br>
-    <div class=bbox>
-        <p class=txt>Enter Data Stream:</p>
-        <input id="data2"></input>
-        <button onclick="go()">Go</button>
-    </div>
-			<p>Go to Nikhil's website: <a href="https://www.nikhilrado.com">nikhilrado.com</a></p>
-		</div>
-	  <div class="column right">
-			<div id="model" style="width: 100%; height: 700px; padding: 0px;"> </div>
-		</div>
-	</div>
-	
-    
-
-
-</body>
-
-=======
-<!DOCTYPE html>
-<html>
-
-<head>
 	<script src="/ex-scripts/three.min.js"></script>
 	<script src="/ex-scripts/STLLoader.js"></script>
 	<script src="/ex-scripts/OrbitControls.js"></script>
@@ -75,6 +16,7 @@
 </head>
 
 <body>
+
 	<div class="header">
 		<div id="logo">
 			<p>Home</p>
@@ -82,7 +24,7 @@
 		<div id="menu">
 			<p><a href="/about">About</a></p>
 			<p><a href='https://doc.clickup.com/10552948/p/h/a21km-408/5a9010c6cb9cd39' target="_blank">Roadmap</a></p>
-			<p>Tutorial</p>
+			<p><a href='/tutorial' target="_blank">Tutorial</a></p>
 		</div>
 	</div>
 
@@ -93,22 +35,89 @@
 				<h2>Gain a solid understanding of your data by visualizing it in three dimensions.</h2>
 			</div>
 
-			<p>Select a CSV file or enter a datastream:</p><br>
-			<div class=bbox>
-				<input type="file" id="fileUpload" />
-				<input type="button" id="upload" value="Go" onclick="Upload()" />
-			</div><br>
-			<div class=bbox>
-				<p class=txt>Enter Data Stream:</p>
-				<input id="data2"></input>
-				<button onclick="go()">Go</button>
+
+			<div class="container">
+				<div class="dropdown">
+					<!-- Default icon and text for GitHub, with dropdown icon -->
+					<button class="dropbtn" id="left-dropdown">
+						<i class="fab fa-github"></i>
+						Github
+						<i class="fas fa-chevron-down dropdown-icon"></i>
+					</button>
+					<div id="feed-picker-dropdown-content" class="dropdown-content">
+						<p onclick="changeButtonText(this, '<i class=\'fab fa-github\'></i> Github')">
+							<i class="fab fa-github"></i>
+							<span>Github</span>
+						</p>
+						<p onclick="changeButtonText(this, '<i class=\'fas fa-map-marker-alt\'></i> Location')">
+							<i class="fas fa-map-marker-alt"></i>
+							<span>Location</span>
+						</p>
+						<p onclick="openFileSelector()">
+							<i class="fas fa-paperclip"></i>
+							<span>File Upload</span>
+						</p>
+					</div>
+				</div>
+				<input id="filenameInput" placeholder="nikhilrado">
+				<button class="dropbtn" id="right-dropdown" onclick="go()">Go</button>
 			</div>
+
+			<input type="file" id="fileInput" accept=".csv" onchange="setFileName()">
 			<!-- <p>Go to Nikhil's website: <a href="https://www.nikhilrado.com">nikhilrado.com</a></p> -->
 		</div>
 		<div class="column right">
 			<div id="model" style="width: 100%; height: 700px; padding: 0px;"> </div>
 		</div>
 	</div>
+
+
+
+
 </body>
+
+<script>
+	function changeButtonText(element, textWithIcon) {
+		// Update the dropdown button text and icon
+		document.getElementById("left-dropdown").innerHTML = textWithIcon + ' <i class="fas fa-chevron-down dropdown-icon"></i>';
+		document.getElementById('filenameInput').placeholder = 'nikhilrado';
+		document.getElementById('filenameInput').value = '';
+		document.getElementById('filenameInput').focus();
+		document.getElementById('filenameInput').removeAttribute('readonly');
+		// Hide the dropdown after selection
+		document.getElementById('feed-picker-dropdown-content').style.display = 'none';
+	}
+
+	function openFileSelector() {
+		document.getElementById('fileInput').click();
+	}
+
+	function setFileName() {
+		const fileInput = document.getElementById('fileInput');
+		const filename = fileInput.files[0].name;
+		document.getElementById('filenameInput').placeholder = filename;
+		document.getElementById('filenameInput').setAttribute('readonly', 'readonly');
+		document.getElementById("left-dropdown").innerHTML = '<i class="fas fa-paperclip"></i> File Upload <i class="fas fa-chevron-down dropdown-icon"></i>';
+	}
+
+	const button = document.querySelector('.dropbtn');
+	const dropdown = document.getElementById('feed-picker-dropdown-content');
+
+	button.addEventListener('mouseover', function () {
+		dropdown.style.display = 'block';
+	});
+
+	button.addEventListener('mouseout', function () {
+		dropdown.style.display = 'none';
+	});
+
+	dropdown.addEventListener('mouseover', function () {
+		dropdown.style.display = 'block';
+	});
+
+	dropdown.addEventListener('mouseout', function () {
+		dropdown.style.display = 'none';
+	});
+</script>
 
 </html>

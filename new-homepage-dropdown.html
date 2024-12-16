@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Font Awesome CDN for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <style>
+    .container {
+      display: flex;
+      align-items: center;
+    }
+
+    .dropbtn {
+      color: white;
+      margin: 0;
+      padding-left: 16px;
+      font-size: 16px;
+      font-family: sans-serif;
+      border: none;
+      cursor: pointer;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-right: 10px;
+      position: relative;
+      transition: filter 0.2s ease;
+      /* Add smooth transition to filter property */
+    }
+
+    /* Hover and focus-within effect for the left dropdown */
+    .dropdown:hover .dropbtn,
+    .dropdown:focus-within .dropbtn,
+    .dropbtn:hover {
+      filter: hue-rotate(40deg);
+    }
+
+    #left-dropdown {
+      border-top-left-radius: 15px;
+      border-bottom-left-radius: 15px;
+      background: #8207df;
+      background: linear-gradient(45deg, #8207df 5%, #090979 35%, #055db1 97%);
+    }
+
+    #right-dropdown {
+      border-top-right-radius: 15px;
+      border-bottom-right-radius: 15px;
+      background: #090979;
+      background: linear-gradient(-45deg, #090979 20%, #055db1 97%);
+      padding-right: 20px;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 180px;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      border-radius: 15px;
+      font-family: sans-serif;
+      padding: 4px;
+    }
+
+    .dropdown-content p {
+      color: black;
+      padding: 8px 12px;
+      margin: 0;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: start;
+      cursor: pointer;
+      border-radius: 11px;
+    }
+
+    /* Ensure icons are centered and have equal width */
+    .dropdown-content p i {
+      flex-shrink: 0;
+      width: 16px;
+      text-align: center;
+    }
+
+    .dropdown-content p span {
+      margin-left: 8px;
+      flex-grow: 1;
+    }
+
+    .dropdown-content p:hover {
+      background-color: #f1f1f1;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .dropdown:hover .dropbtn {
+      background-color: #3e8e41;
+    }
+
+    input {
+      border: none;
+      background-color: rgb(197, 197, 197);
+      height: 38px;
+      box-sizing: border-box;
+      padding: 0 16px;
+      margin: 0;
+      flex-grow: 0;
+      font-family: sans-serif;
+    }
+
+    input:focus {
+      outline: none;
+    }
+
+    #fileInput {
+      display: none;
+    }
+
+    .dropbtn i {
+      margin-right: 8px;
+    }
+
+    .dropbtn .dropdown-icon {
+      margin-left: 8px;
+      font-size: 12px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h2>Solidify Dropdown Menu v2</h2>
+  <p>Move the mouse over the button to open the dropdown menu and select an option.</p>
+
+  <div class="container">
+    <div class="dropdown">
+      <!-- Default icon and text for GitHub, with dropdown icon -->
+      <button class="dropbtn" id="left-dropdown">
+        <i class="fab fa-github"></i>
+        Github
+        <i class="fas fa-chevron-down dropdown-icon"></i>
+      </button>
+      <div id="feed-picker-dropdown-content" class="dropdown-content">
+        <p onclick="changeButtonText(this, '<i class=\'fab fa-github\'></i> Github')">
+          <i class="fab fa-github"></i>
+          <span>Github</span>
+        </p>
+        <p onclick="changeButtonText(this, '<i class=\'fas fa-map-marker-alt\'></i> Location')">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>Location</span>
+        </p>
+        <p onclick="openFileSelector()">
+          <i class="fas fa-paperclip"></i>
+          <span>File Upload</span>
+        </p>
+      </div>
+    </div>
+    <input id="filenameInput" placeholder="nikhilrado">
+    <button class="dropbtn" id="right-dropdown">Go</button>
+  </div>
+
+  <input type="file" id="fileInput" accept=".csv" onchange="setFileName()">
+
+  <script>
+    function changeButtonText(element, textWithIcon) {
+      // Update the dropdown button text and icon
+      document.getElementById("left-dropdown").innerHTML = textWithIcon + ' <i class="fas fa-chevron-down dropdown-icon"></i>';
+      document.getElementById('filenameInput').placeholder = 'nikhilrado';
+      document.getElementById('filenameInput').value = '';
+      document.getElementById('filenameInput').focus();
+      document.getElementById('filenameInput').removeAttribute('readonly');
+      // Hide the dropdown after selection
+      document.getElementById('feed-picker-dropdown-content').style.display = 'none';
+    }
+
+    function openFileSelector() {
+      document.getElementById('fileInput').click();
+    }
+
+    function setFileName() {
+      const fileInput = document.getElementById('fileInput');
+      const filename = fileInput.files[0].name;
+      document.getElementById('filenameInput').placeholder = filename;
+      document.getElementById('filenameInput').setAttribute('readonly', 'readonly');
+      document.getElementById("left-dropdown").innerHTML = '<i class="fas fa-paperclip"></i> File Upload <i class="fas fa-chevron-down dropdown-icon"></i>';
+    }
+
+    const button = document.querySelector('.dropbtn');
+    const dropdown = document.getElementById('feed-picker-dropdown-content');
+
+    button.addEventListener('mouseover', function () {
+      dropdown.style.display = 'block';
+    });
+
+    button.addEventListener('mouseout', function () {
+      dropdown.style.display = 'none';
+    });
+
+    dropdown.addEventListener('mouseover', function () {
+      dropdown.style.display = 'block';
+    });
+
+    dropdown.addEventListener('mouseout', function () {
+      dropdown.style.display = 'none';
+    });
+  </script>
+
+</body>
+
+</html>
