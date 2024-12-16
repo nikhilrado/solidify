@@ -1,31 +1,3 @@
-// code for new dropdown modal
-function changeButtonText(element, textWithIcon) {
-  // Update the dropdown button text and icon
-  document.getElementById("left-dropdown").innerHTML = textWithIcon + ' <i class="fas fa-chevron-down dropdown-icon"></i>';
-  document.getElementById('filenameInput').placeholder = 'nikhilrado';
-  document.getElementById('filenameInput').value = '';
-  document.getElementById('filenameInput').focus();
-  document.getElementById('filenameInput').removeAttribute('readonly');
-  // Hide the dropdown after selection
-  document.getElementById('feed-picker-dropdown-content').style.display = 'none';
-}
-
-function openFileSelector() {
-  document.getElementById('fileInput').click();
-}
-
-function setFileName() {
-  const fileInput = document.getElementById('fileInput');
-  const filename = fileInput.files[0].name;
-  document.getElementById('filenameInput').placeholder = filename;
-  document.getElementById('filenameInput').setAttribute('readonly', 'readonly');
-  document.getElementById("left-dropdown").innerHTML = '<i class="fas fa-paperclip"></i> File Upload <i class="fas fa-chevron-down dropdown-icon"></i>';
-}
-
-// Initialize these variables after DOM loads
-let button;
-let dropdown;
-
 // functionality scripts
 function submit() {
   alert(`The function 'test' is executed`);
@@ -76,7 +48,7 @@ function Upload() {
   if (regex.test(fileUpload.value.toLowerCase())) {
     if (typeof FileReader != "undefined") {
       var reader = new FileReader();
-      reader.onload = function(e) {
+      reader.onload = function (e) {
         var table = document.createElement("table");
         var rows = e.target.result.split("\n");
         for (var i = 0; i < rows.length; i++) {
@@ -108,7 +80,7 @@ function Upload() {
 
 function go() {
   sessionStorage.setItem("data", document.getElementById("data2").value);
-  window.location.href = "/create?data=" + document.getElementById('data2').value
+  window.location.href = "/create?data="+document.getElementById('data2').value
 }
 
 function getCookie(cname) {
@@ -138,33 +110,33 @@ if (getCookie("uuid") == "") {
 console.log(getCookie("uuid"));
 
 window.onload = function() {
-  //var input2 = document.getElementById("upload");
-  //input2.addEventListener("change", Upload);
+	//var input2 = document.getElementById("upload");
+	//input2.addEventListener("change", Upload);
 
-  //input2.onchange = () => {
-  //  const selectedFile = input2.files[0];
-  //  console.log(selectedFile);
-  //};
+	//input2.onchange = () => {
+	//  const selectedFile = input2.files[0];
+	//  console.log(selectedFile);
+	//};
 
-  //const fileInput = document.getElementById("upload");
-  //const handleFiles = () => {
-  //  const selectedFiles = [...fileInput.files];
-  //  console.log(selectedFiles);
-  //};
-  //fileInput.addEventListener("change", handleFiles);
+	//const fileInput = document.getElementById("upload");
+	//const handleFiles = () => {
+	//  const selectedFiles = [...fileInput.files];
+	//  console.log(selectedFiles);
+	//};
+	//fileInput.addEventListener("change", handleFiles);
 }
 
 // 3d stuff
 function STLViewer(model, elementID) {
   var elem = document.getElementById(elementID);
   camera = new THREE.PerspectiveCamera(
-    70, elem.clientWidth / elem.clientHeight, 1, 1000);
+    70, elem.clientWidth / elem.clientHeight,1,1000);
   renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
   renderer.setSize(elem.clientWidth, elem.clientHeight);
   elem.appendChild(renderer.domElement);
   window.addEventListener(
     "resize",
-    function() {
+    function () {
       renderer.setSize(elem.clientWidth, elem.clientHeight);
       camera.aspect = elem.clientWidth / elem.clientHeight;
       camera.updateProjectionMatrix();
@@ -183,18 +155,18 @@ function STLViewer(model, elementID) {
 
   scene = new THREE.Scene();
   scene.add(new THREE.HemisphereLight(0xffffff, 1.5));
-  const light = new THREE.PointLight(0xffffff, 1, 100);
-  light.position.set(50, 50, 50);
-  scene.add(light);
-  const light2 = new THREE.PointLight(0xffffff, 1, 100);
-  light2.position.set(-50, 50, 50);
-  scene.add(light2);
+	const light = new THREE.PointLight( 0xffffff, 1, 100 );
+	light.position.set( 50, 50, 50 );
+	scene.add(light);
+	const light2 = new THREE.PointLight( 0xffffff, 1, 100 );
+	light2.position.set( -50, 50, 50 );
+	scene.add(light2);
 
   loadit(model);
 }
 
-function loadit(model) {
-  new THREE.STLLoader().load(model, function(geometry) {
+function loadit(model){
+  new THREE.STLLoader().load(model, function (geometry) {
     var material = new THREE.MeshPhongMaterial({
       color: 0xff5533,
       specular: 100,
@@ -220,7 +192,7 @@ function loadit(model) {
     );
     camera.position.z = largestDimension * 2;
 
-    var animate = function() {
+    var animate = function () {
       requestAnimationFrame(animate);
       controls.update();
       renderer.render(scene, camera);
@@ -231,62 +203,43 @@ function loadit(model) {
 }
 
 
-var URL = 'https://api.solidify.ortanatech.com/3d/csv?csv='
+		var URL = 'https://api.solidify.ortanatech.com/3d/csv?csv='
 
-
-
-function load_stl(csv) {
-  fetch(URL + csv + "&uuid=" + getCookie("uuid"))
-    .then(function(u) { return u.json(); })
-    .then(function(json) {
-      console.log(json);
-      //loadit(json);
-      stlLink = json;
-      // document.getElementById("download-stl-link").href = stlLink;
-      STLViewer(json, "model"); // calling and passing json to another function processPriceInfo
+	
+	
+	function load_stl(csv){
+    fetch(URL+csv+"&uuid="+getCookie("uuid"))
+    .then(function (u) {return u.json();})
+    .then(function (json) {
+		console.log(json);
+		//loadit(json);
+		stlLink = json;
+		document.getElementById("download-stl-link").href = stlLink;
+    STLViewer(json, "model"); // calling and passing json to another function processPriceInfo
     });
-}
-//var data = prompt("enter some data")
-console.log(location.search)
-const params = new URLSearchParams(location.search);
-var param_data = params.get('data')
-console.log("fdfd:" + param_data)
-if (param_data != null) {
-  load_stl(param_data)
-} else {
-  var data = getCookie("data")
-  data = sessionStorage.getItem('data');
+	}
+	//var data = prompt("enter some data")
+	console.log(location.search)
+	const params = new URLSearchParams(location.search);
+	var param_data = params.get('data')
+	console.log("fdfd:"+param_data)
+	if(param_data != null){
+		load_stl(param_data)
+	} else {		
+		var data = getCookie("data")
+		data = sessionStorage.getItem('data');
+	
+		console.log(data);
+		load_stl(data)
+	}
 
-  console.log(data);
-  load_stl(data)
-}
-
-//load_stl([2,3,1,3,4,2,5,2,3,.5,2])
+	//load_stl([2,3,1,3,4,2,5,2,3,.5,2])
 
 
 window.onload = function() {
-  //STLViewer("https://3ddata.nikhilrado.repl.co/ex-scripts/will-ronan.stl", "model")
-  STLViewer("/ex-scripts/cshs.stl", "model")
+    //STLViewer("https://3ddata.nikhilrado.repl.co/ex-scripts/will-ronan.stl", "model")
+STLViewer("/ex-scripts/cshs.stl", "model")
 
-  button = document.querySelector('.dropbtn');
-  dropdown = document.getElementById('feed-picker-dropdown-content');
-
-  button.addEventListener('mouseover', function() {
-    dropdown.style.display = 'block';
-  });
-
-  button.addEventListener('mouseout', function() {
-    dropdown.style.display = 'none';
-  });
-
-  dropdown.addEventListener('mouseover', function() {
-    dropdown.style.display = 'block';
-  });
-
-  dropdown.addEventListener('mouseout', function() {
-    dropdown.style.display = 'none';
-  });
-
-
+	
 
 }
