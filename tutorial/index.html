@@ -1,1 +1,137 @@
-To begin, upload a CSV file. The file can either be a 2x2 grid of data or a two column time series.
+<div class="header">
+	<div id="logo">
+		<p><a href="/">Home</a></p>
+	</div>
+	<div id="menu">
+		<p><a href="/about">About</a></p>
+		<p><a href='https://doc.clickup.com/10552948/p/h/a21km-408/5a9010c6cb9cd39' target="_blank">Roadmap</a></p>
+		<p><a href='/tutorial' target="_blank">Tutorial</a></p>
+	</div>
+</div>
+
+<body>
+	<div style="width: 800px; margin: 0 auto;">
+	<h1>Using Solidify</h1>
+	<p>Solidify takes two dimensional data and converts it into a 3d object. To begin, upload a CSV file. The file can
+		either be a 2x2 grid of data or a two column time series.</p>
+
+	<h2>Upload A File</h2>
+	<h3>Raw Data Example (with headers)</h3>
+	<table>
+		<thead>
+			<tr>
+				<th>Week 1</th>
+				<th>Week 2</th>
+				<th>Week 3</th>
+				<th>Week 4</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>21</td>
+				<td>22</td>
+				<td>29</td>
+				<td>31</td>
+			</tr>
+			<tr>
+				<td>18</td>
+				<td>22</td>
+				<td>21</td>
+				<td>23</td>
+			</tr>
+			<tr>
+				<td>18</td>
+				<td>21</td>
+				<td>31</td>
+				<td>52</td>
+			</tr>
+			<tr>
+				<td>...</td>
+				<td>...</td>
+				<td>...</td>
+				<td>...</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>Time Series Data</h3>
+	<p>Column one should contain dates, column two should contain values. The model will be created so that the x axis is
+		weeks of the year, the z axis (depth) are the days of the week starting from Sunday to Saturday, and the y axis
+		(height) is the data values. Dates should be formatted in the "%m/%d/%Y" format as shown below.</p>
+	<table>
+		<thead>
+			<tr>
+				<th>Date</th>
+				<th>Value</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>01/01/2022</td>
+				<td>4</td>
+			</tr>
+			<tr>
+				<td>01/02/2022</td>
+				<td>8</td>
+			</tr>
+			<tr>
+				<td>01/02/2022</td>
+				<td>9</td>
+			</tr>
+			<tr>
+				<td>...</td>
+				<td>...</td>
+			</tr>
+		</tbody>
+	</table>
+	</div>
+</body>
+<style>
+	html,
+	body {
+		font-family: Arial, Helvetica, sans-serif;
+		padding: 20px;
+		margin: 0;
+	}
+
+	table {
+		border-collapse: collapse;
+	}
+
+	th,
+	td {
+		border: 1px solid black;
+		width: 100px;
+		padding: 2px;
+	}
+
+	td {
+		text-align: right;
+	}
+
+	.header {
+		display: flex;
+		font-family: sans-serif;
+		/* font-size: 1.5vw; */
+	}
+
+	#logo {
+		display: flex;
+		width: 70%;
+	}
+
+	#menu {
+		display: flex;
+		width: 30%;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	p,
+	.txt {
+		font-family: sans-serif;
+		font-size: 16px;
+		display: inline-block;
+		margin: 0px;
+	}
+</style>

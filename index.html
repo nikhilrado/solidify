@@ -19,12 +19,12 @@
 
 	<div class="header">
 		<div id="logo">
-			<p>Home</p>
+			<p><a href="/">Home</a></p>
 		</div>
 		<div id="menu">
 			<p><a href="/about">About</a></p>
 			<p><a href='https://doc.clickup.com/10552948/p/h/a21km-408/5a9010c6cb9cd39' target="_blank">Roadmap</a></p>
-			<p><a href='/tutorial' target="_blank">Tutorial</a></p>
+			<p><a href='/tutorial'>Tutorial</a></p>
 		</div>
 	</div>
 
@@ -59,7 +59,7 @@
 						</p>
 					</div>
 				</div>
-				<input id="filenameInput" placeholder="nikhilrado">
+				<input id="filenameInput" placeholder="github_username">
 				<button class="dropbtn" id="right-dropdown" onclick="go()">Go</button>
 			</div>
 
@@ -80,7 +80,7 @@
 	function changeButtonText(element, textWithIcon) {
 		// Update the dropdown button text and icon
 		document.getElementById("left-dropdown").innerHTML = textWithIcon + ' <i class="fas fa-chevron-down dropdown-icon"></i>';
-		document.getElementById('filenameInput').placeholder = 'nikhilrado';
+		document.getElementById('filenameInput').placeholder = 'github_username';
 		document.getElementById('filenameInput').value = '';
 		document.getElementById('filenameInput').focus();
 		document.getElementById('filenameInput').removeAttribute('readonly');
