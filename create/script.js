@@ -13,6 +13,7 @@ function getCookie(cname) {
   }
   return "";
 }
+
 var jsondata;
 window.addEventListener("load", function () {
   const password = document.getElementById("o-name");
@@ -110,6 +111,7 @@ function STLViewer(model, elementID) {
 }
 
 function loadit(model) {
+  document.getElementById('loading-spinner').style.display = 'block';
   new THREE.STLLoader().load(model, function (geometry) {
     var material = new THREE.MeshPhongMaterial({
       color: 0xff5533,
@@ -143,6 +145,7 @@ function loadit(model) {
     };
 
     animate();
+    document.getElementById('loading-spinner').style.display = 'none';
   });
 }
 
