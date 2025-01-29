@@ -19,6 +19,34 @@ background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(208,208,208,1) 6
   width: 50%;
 }
 
+/* start menu code */
+a {
+	color: #090979;
+	font-family: monospace;
+	text-decoration: none;
+}
+a:hover {
+	color: #8207df;
+}
+
+.header {
+	display: flex;
+	font-family: sans-serif;
+	font-size: 1.5vw;
+}
+
+#logo{
+	display: flex;
+	width: 70%;
+}
+#menu {
+	display: flex;
+	width: 30%;
+	justify-content: space-between;
+	align-items: center;
+}
+/* end menu code */
+
 /*
 #model {
 	background-color: #ffffff;
@@ -38,23 +66,6 @@ canvas {
 	align-items: flex-start;
 	font-family: sans-serif;
 	width: 100%;
-}
-
-.header {
-	display: flex;
-	font-family: sans-serif;
-	font-size: 1.5vw;
-}
-
-#logo{
-	display: flex;
-	width: 70%;
-}
-#menu {
-	display: flex;
-	width: 30%;
-	justify-content: space-between;
-	align-items: center;
 }
 
 h2 {

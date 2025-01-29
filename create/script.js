@@ -150,9 +150,10 @@ function loadit(model) {
 }
 
 var URL = "https://api.solidify.ortanatech.com/3d/csv?csv=";
+var text = 'Solidify'
 
 function load_stl(csv) {
-  fetch(URL + csv + "&uuid=" + getCookie("uuid"))
+  fetch(URL + csv + "&uuid=" + getCookie("uuid") + "&text=" + text)
     .then(function (u) {
       return u.json();
     })

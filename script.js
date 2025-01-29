@@ -160,7 +160,7 @@ function STLViewer(model, elementID) {
 function loadit(model) {
   new THREE.STLLoader().load(model, function(geometry) {
     var material = new THREE.MeshPhongMaterial({
-      color: 0xff5533,
+      color: 0x8207df,
       specular: 100,
       shininess: 100,
     });
