@@ -15,7 +15,7 @@ function getCookie(cname) {
 }
 
 var jsondata;
-window.addEventListener("load", function () {
+window.addEventListener("load", function() {
   const password = document.getElementById("o-name");
 
   password.addEventListener("focus", (event) => {
@@ -26,7 +26,7 @@ window.addEventListener("load", function () {
       "https://api.solidify.ortanatech.com/action?action=upload-model&uuid=";
     fetch(URL + getCookie("uuid"))
       .then((response) => response.json())
-      .then(function (json) {
+      .then(function(json) {
         jsondata = json;
         console.log(jsondata);
         document.getElementById("payy").style.backgroundColor = "lightgreen";
@@ -51,8 +51,8 @@ function getCheckoutLink(shipping_countryf, obj_name) {
       shipping_country: "US",
       prod_name: obj_name,
     }),
-  }).then(function (response) {
-    return response.text().then(function (text) {
+  }).then(function(response) {
+    return response.text().then(function(text) {
       console.log(text);
       window.location.href = text;
     });
@@ -81,7 +81,7 @@ function STLViewer(model, elementID) {
   elem.appendChild(renderer.domElement);
   window.addEventListener(
     "resize",
-    function () {
+    function() {
       renderer.setSize(elem.clientWidth, elem.clientHeight);
       camera.aspect = elem.clientWidth / elem.clientHeight;
       camera.updateProjectionMatrix();
@@ -112,7 +112,7 @@ function STLViewer(model, elementID) {
 
 function loadit(model) {
   document.getElementById('loading-spinner').style.display = 'block';
-  new THREE.STLLoader().load(model, function (geometry) {
+  new THREE.STLLoader().load(model, function(geometry) {
     var material = new THREE.MeshPhongMaterial({
       color: 0xff5533,
       specular: 100,
@@ -138,7 +138,7 @@ function loadit(model) {
     );
     camera.position.z = largestDimension * 1.5;
 
-    var animate = function () {
+    var animate = function() {
       requestAnimationFrame(animate);
       controls.update();
       renderer.render(scene, camera);
@@ -148,22 +148,26 @@ function loadit(model) {
     document.getElementById('loading-spinner').style.display = 'none';
   });
 }
+console.log(location.search);
+const params = new URLSearchParams(location.search);
+var param_data = params.get("data");
+console.log("fdfd:" + param_data);
 
 var URL = "https://api.solidify.ortanatech.com/3d/csv?csv=";
 var text = 'Solidify';
 
 // Extract username from URL if it contains github-{username}
 if (param_data && param_data.startsWith('github-')) {
-    const username = param_data.replace('github-', '');
-    text = `Github: @${username}`;
+  const username = param_data.replace('github-', '');
+  text = `Github: @${username}`;
 }
 
 function load_stl(csv) {
   fetch(URL + csv + "&uuid=" + getCookie("uuid") + "&text=" + text)
-    .then(function (u) {
+    .then(function(u) {
       return u.json();
     })
-    .then(function (json) {
+    .then(function(json) {
       console.log(json);
       //loadit(json);
       stlLink = json;
@@ -172,10 +176,7 @@ function load_stl(csv) {
     });
 }
 //var data = prompt("enter some data")
-console.log(location.search);
-const params = new URLSearchParams(location.search);
-var param_data = params.get("data");
-console.log("fdfd:" + param_data);
+
 if (param_data != null) {
   load_stl(param_data);
 } else {
@@ -188,6 +189,6 @@ if (param_data != null) {
 
 //load_stl([2,3,1,3,4,2,5,2,3,.5,2])
 
-window.onload = function () {
+window.onload = function() {
   //STLViewer("https://3ddata.nikhilrado.repl.co/ex-scripts/will-ronan.stl", "model")
 };
