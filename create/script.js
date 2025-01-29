@@ -13,6 +13,7 @@ function getCookie(cname) {
   }
   return "";
 }
+
 var jsondata;
 window.addEventListener("load", function () {
   const password = document.getElementById("o-name");
@@ -110,6 +111,7 @@ function STLViewer(model, elementID) {
 }
 
 function loadit(model) {
+  document.getElementById('loading-spinner').style.display = 'block';
   new THREE.STLLoader().load(model, function (geometry) {
     var material = new THREE.MeshPhongMaterial({
       color: 0xff5533,
@@ -143,13 +145,21 @@ function loadit(model) {
     };
 
     animate();
+    document.getElementById('loading-spinner').style.display = 'none';
   });
 }
 
 var URL = "https://api.solidify.ortanatech.com/3d/csv?csv=";
+var text = 'Solidify';
+
+// Extract username from URL if it contains github-{username}
+if (param_data && param_data.startsWith('github-')) {
+    const username = param_data.replace('github-', '');
+    text = `Github: @${username}`;
+}
 
 function load_stl(csv) {
-  fetch(URL + csv + "&uuid=" + getCookie("uuid"))
+  fetch(URL + csv + "&uuid=" + getCookie("uuid") + "&text=" + text)
     .then(function (u) {
       return u.json();
     })

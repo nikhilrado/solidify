@@ -87,8 +87,9 @@ function go() {
     Upload()
     return;
   }
-  sessionStorage.setItem("data", document.getElementById("filenameInput").value);
-  window.location.href = `/create?data=${dataPrefix}` + document.getElementById('filenameInput').value
+  let dataValue = dataPrefix + document.getElementById('filenameInput').value;
+  sessionStorage.setItem("data", dataValue);
+  window.location.href = `/create?data=${dataValue}`
 }
 
 function getCookie(cname) {
@@ -116,23 +117,6 @@ if (getCookie("uuid") == "") {
   console.log("uuid created");
 }
 console.log(getCookie("uuid"));
-
-window.onload = function() {
-  //var input2 = document.getElementById("upload");
-  //input2.addEventListener("change", Upload);
-
-  //input2.onchange = () => {
-  //  const selectedFile = input2.files[0];
-  //  console.log(selectedFile);
-  //};
-
-  //const fileInput = document.getElementById("upload");
-  //const handleFiles = () => {
-  //  const selectedFiles = [...fileInput.files];
-  //  console.log(selectedFiles);
-  //};
-  //fileInput.addEventListener("change", handleFiles);
-}
 
 // 3d stuff
 function STLViewer(model, elementID) {
@@ -176,7 +160,7 @@ function STLViewer(model, elementID) {
 function loadit(model) {
   new THREE.STLLoader().load(model, function(geometry) {
     var material = new THREE.MeshPhongMaterial({
-      color: 0xff5533,
+      color: 0x8207df,
       specular: 100,
       shininess: 100,
     });
@@ -226,26 +210,28 @@ function load_stl(csv) {
       STLViewer(json, "model"); // calling and passing json to another function processPriceInfo
     });
 }
-//var data = prompt("enter some data")
-console.log(location.search)
-const params = new URLSearchParams(location.search);
-var param_data = params.get('data')
-console.log("fdfd:" + param_data)
-if (param_data != null) {
-  load_stl(param_data)
-} else {
-  var data = getCookie("data")
-  data = sessionStorage.getItem('data');
+// //var data = prompt("enter some data")
+// console.log(location.search)
+// const params = new URLSearchParams(location.search);
+// var param_data = params.get('data')
+// console.log("fdfd:" + param_data)
+// if (param_data != null) {
+//   load_stl(param_data)
+// } else {
+//   var data = getCookie("data")
+//   data = sessionStorage.getItem('data');
 
-  console.log(data);
-  load_stl(data)
-}
+//   console.log(data);
+//   load_stl(data)
+// }
 
 //load_stl([2,3,1,3,4,2,5,2,3,.5,2])
 
 
 window.onload = function() {
-  // STLViewer("https://3ddata.nikhilrado.repl.co/ex-scripts/will-ronan.stl", "model")
+  // STLViewer("ex-scripts/will-ronan.stl", "model")
+  document.getElementById("filenameInput").focus();
+  STLViewer("/ex-scripts/cshs.stl", "model")
 
   // Add event listener for 'keypress' on filenameInput
   document.getElementById('filenameInput').addEventListener('keypress', function(e) {
@@ -296,7 +282,6 @@ window.onload = function() {
     dropdown.style.display = 'none';
   });
 
-  // STLViewer("/ex-scripts/cshs.stl", "model")
 
 
 
