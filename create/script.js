@@ -150,7 +150,13 @@ function loadit(model) {
 }
 
 var URL = "https://api.solidify.ortanatech.com/3d/csv?csv=";
-var text = 'Solidify'
+var text = 'Solidify';
+
+// Extract username from URL if it contains github-{username}
+if (param_data && param_data.startsWith('github-')) {
+    const username = param_data.replace('github-', '');
+    text = `Github: @${username}`;
+}
 
 function load_stl(csv) {
   fetch(URL + csv + "&uuid=" + getCookie("uuid") + "&text=" + text)
